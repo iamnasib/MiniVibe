@@ -179,7 +179,7 @@ workflow.add_edge("synthesizer",END)
 
 worker=workflow.compile()
 
-state=worker.invoke({"prompt":"I want a single landing page for my restaurant named as Kashmiri Delight which is completely interactive and eye catchy"})
+state=worker.invoke({"prompt":"Build a todo app with HTML, CSS, and vanilla JavaScript"})
 
 with open("code.txt","w",encoding='utf-8') as code:
     code.write(state['final_code'])
