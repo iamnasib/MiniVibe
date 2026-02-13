@@ -1,0 +1,949 @@
+FILE: index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kashmiri Delight</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header id="header" role="banner">
+    <nav class="navbar" aria-label="Primary">
+      <a href="#hero" class="logo" aria-label="Kashmiri Delight Home">Kashmiri Delight</a>
+      <button id="nav-toggle" class="nav-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Menu">
+        ☰
+      </button>
+      <ul id="primary-menu" class="nav-menu" role="menu">
+        <li role="none"><a role="menuitem" href="#about">About Us</a></li>
+        <li role="none"><a role="menuitem" href="#menu">Menu</a></li>
+        <li role="none"><a role="menuitem" href="#gallery">Gallery</a></li>
+        <li role="none"><a role="menuitem" href="#testimonials">Testimonials</a></li>
+        <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero" role="region" aria-label="Hero section">
+      <div class="hero-content">
+        <h1>Welcome to Kashmiri Delight</h1>
+        <p>Experience the authentic taste of Kashmir with every bite.</p>
+        <a href="#menu" class="btn-primary" role="button">Explore Our Menu</a>
+      </div>
+    </section>
+
+    <section id="about" class="about" role="region" aria-labelledby="about-title">
+      <h2 id="about-title">About Us</h2>
+      <p>
+        Kashmiri Delight is dedicated to bringing the rich culinary heritage of Kashmir to your table. From aromatic spices to traditional recipes,
+        every dish promises an unforgettable dining experience.
+      </p>
+    </section>
+
+    <section id="menu" class="menu" role="region" aria-labelledby="menu-title">
+      <h2 id="menu-title">Menu Highlights</h2>
+      <ul class="menu-list">
+        <li class="menu-item" tabindex="0">
+          <img src="images/gushtaba.jpg" alt="Gushtaba - minced mutton meatballs" />
+          <h3>Gushtaba</h3>
+          <p>Delicious minced mutton meatballs simmered in yogurt gravy, a royal Kashmiri delicacy.</p>
+        </li>
+        <li class="menu-item" tabindex="0">
+          <img src="images/roganjosh.jpg" alt="Rogan Josh - aromatic lamb curry" />
+          <h3>Rogan Josh</h3>
+          <p>A rich and fragrant aromatic lamb curry infused with traditional Kashmiri spices.</p>
+        </li>
+        <li class="menu-item" tabindex="0">
+          <img src="images/haakh.jpg" alt="Haakh - Kashmiri leafy greens dish" />
+          <h3>Haakh</h3>
+          <p>A wholesome dish made from tender Kashmiri leafy greens cooked with subtle spices.</p>
+        </li>
+        <li class="menu-item" tabindex="0">
+          <img src="images/naan.jpg" alt="Kashmiri Naan with saffron and nuts" />
+          <h3>Kashmiri Naan</h3>
+          <p>Fluffy naan bread enriched with saffron, nuts, and raisins, perfect to complement your meal.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="gallery" class="gallery" role="region" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">Gallery</h2>
+      <div class="gallery-grid" aria-live="polite" aria-atomic="true">
+        <button class="gallery-prev" aria-label="Previous image">&#10094;</button>
+        <div class="gallery-images">
+          <img src="images/gallery1.jpg" alt="Traditional Kashmiri spices in bowls" loading="lazy" />
+          <img src="images/gallery2.jpg" alt="Chef preparing Rogan Josh in kitchen" loading="lazy" />
+          <img src="images/gallery3.jpg" alt="Serving Gushtaba dish garnished with coriander" loading="lazy" />
+          <img src="images/gallery4.jpg" alt="Ambient interior of Kashmiri Delight restaurant" loading="lazy" />
+        </div>
+        <button class="gallery-next" aria-label="Next image">&#10095;</button>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials" role="region" aria-labelledby="testimonials-title">
+      <h2 id="testimonials-title">What Our Guests Say</h2>
+      <ul class="testimonial-list" aria-live="polite">
+        <li class="testimonial-item" tabindex="0">
+          <blockquote>"The flavors at Kashmiri Delight transport me straight to the mountains of Kashmir. Authentic and delicious!"</blockquote>
+          <cite>- Aisha R.</cite>
+        </li>
+        <li class="testimonial-item" tabindex="0">
+          <blockquote>"Outstanding service and an incredible menu. The Rogan Josh is a must-try for any food lover."</blockquote>
+          <cite>- Sameer K.</cite>
+        </li>
+        <li class="testimonial-item" tabindex="0">
+          <blockquote>"A cozy ambiance with traditional decor, paired with amazing dishes. I keep coming back!"</blockquote>
+          <cite>- Neha P.</cite>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact" class="contact" role="region" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact Us</h2>
+      <form id="contact-form" aria-describedby="contact-desc" novalidate>
+        <p id="contact-desc" class="visually-hidden">Use this form to send us a message or inquiry.</p>
+        <div class="form-group">
+          <label for="name">Name<span aria-hidden="true">*</span></label>
+          <input type="text" id="name" name="name" required aria-required="true" />
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email<span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required aria-required="true" />
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+        <div class="form-group">
+          <label for="message">Message<span aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+        <button type="submit" class="btn-primary">Send Message</button>
+        <p id="form-feedback" role="alert" aria-live="assertive"></p>
+      </form>
+      <address class="contact-info">
+        <p><strong>Address:</strong> 123 Himalayan Road, Srinagar, Kashmir</p>
+        <p><strong>Phone:</strong> <a href="tel:+919876543210">+91 98765 43210</a></p>
+        <p><strong>Email:</strong> <a href="mailto:contact@kashmiridelight.com">contact@kashmiridelight.com</a></p>
+      </address>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2024 Kashmiri Delight. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+```
+
+-------------
+
+FILE: styles.css
+```css
+/* Reset & base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  background-color: #fffdfa;
+  color: #3a2e2e;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #ffe6cc 0%, #fff0e6 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Visually hidden (for accessibility) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Links */
+a {
+  color: #b7410e;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: #d95f27;
+  outline: none;
+  text-decoration: underline;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #b7410e;
+  color: #fffdfa;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.125rem;
+  box-shadow: 0 8px 15px rgba(183, 65, 14, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #d95f27;
+  box-shadow: 0 10px 20px rgba(217, 95, 39, 0.5);
+  outline: none;
+}
+
+/* Header */
+header {
+  background: #8c3d02;
+  color: #fffdfa;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(140, 61, 2, 0.7);
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-menu a {
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus {
+  background-color: #d95f27;
+  color: #fffdfa;
+  outline: none;
+}
+
+.nav-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: transparent;
+  border: none;
+  color: #fffdfa;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus {
+  color: #d95f27;
+  outline: none;
+}
+
+/* Hero Section */
+.hero {
+  background: url('images/hero-bg.jpg') center/cover no-repeat fixed;
+  color: #fffdfa;
+  text-align: center;
+  padding: 6rem 1rem 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.7);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(140, 61, 2, 0.45);
+  z-index: -1;
+  backdrop-filter: brightness(0.75);
+}
+
+.hero-content {
+  max-width: 700px;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-family: 'Georgia', serif;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+/* About Us */
+.about {
+  max-width: 900px;
+  margin: 4rem auto 3rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2.25rem;
+  color: #8c3d02;
+  margin-bottom: 1rem;
+  font-family: 'Georgia', serif;
+  text-shadow: 1px 1px 2px rgba(183, 65, 14, 0.5);
+}
+
+.about p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #4b3a1b;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Menu Highlights */
+.menu {
+  background-color: #fff3e6;
+  padding: 3rem 1rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(183, 65, 14, 0.2);
+}
+
+.menu h2 {
+  text-align: center;
+  font-size: 2.25rem;
+  color: #a94507;
+  margin-bottom: 2rem;
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+}
+
+.menu-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  background: #fffdfa;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(183, 65, 14, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline-offset: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.menu-item:focus,
+.menu-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(217, 95, 39, 0.4);
+  outline: none;
+}
+
+.menu-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 3px solid #b7410e;
+  border-radius: 0 0 16px 16px;
+  transition: filter 0.3s ease;
+}
+
+.menu-item:hover img,
+.menu-item:focus img {
+  filter: brightness(1.1);
+}
+
+.menu-item h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.375rem;
+  color: #7a2f01;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  user-select: none;
+}
+
+.menu-item p {
+  font-size: 1rem;
+  color: #5a4126;
+  margin: 0 1rem 0.75rem;
+  flex-grow: 1;
+}
+
+/* Gallery */
+.gallery {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  padding: 0 1rem 3rem;
+}
+
+.gallery h2 {
+  text-align: center;
+  font-size: 2.25rem;
+  color: #a94507;
+  margin-bottom: 2rem;
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+}
+
+.gallery-grid {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden;
+  user-select: none;
+}
+
+.gallery-images {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 900px;
+  scroll-behavior: smooth;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(183, 65, 14, 0.25);
+}
+
+.gallery-images img {
+  min-width: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  max-height: 400px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.gallery-prev,
+.gallery-next {
+  background-color: rgba(183, 65, 14, 0.8);
+  color: #fffdfa;
+  border: none;
+  font-size: 2.5rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(217, 95, 39, 0.6);
+}
+
+.gallery-prev:hover,
+.gallery-prev:focus,
+.gallery-next:hover,
+.gallery-next:focus {
+  background-color: #d95f27;
+  outline: none;
+}
+
+/* Testimonials */
+.testimonials {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  padding: 0 1rem;
+  background: #fff3e6;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(183, 65, 14, 0.2);
+  padding: 3rem 2rem;
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 2.25rem;
+  color: #a94507;
+  margin-bottom: 2.5rem;
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+}
+
+.testimonial-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 2rem;
+}
+
+.testimonial-item {
+  background: #fffdfa;
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 3px 12px rgba(183, 65, 14, 0.15);
+  font-style: italic;
+  color: #5a4126;
+  position: relative;
+  cursor: default;
+  outline-offset: 3px;
+  transition: box-shadow 0.3s ease;
+}
+
+.testimonial-item:focus,
+.testimonial-item:hover {
+  box-shadow: 0 6px 22px rgba(217, 95, 39, 0.35);
+  outline: none;
+}
+
+.testimonial-item blockquote {
+  margin: 0 0 1rem;
+  quotes: "“" "”" "‘" "’";
+}
+
+.testimonial-item blockquote::before {
+  content: open-quote;
+  font-size: 2rem;
+  line-height: 0;
+  vertical-align: -0.4em;
+  color: #d95f27;
+}
+
+.testimonial-item cite {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  color: #8c3d02;
+  text-align: right;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* Contact Section */
+.contact {
+  max-width: 700px;
+  margin: 0 auto 5rem;
+  padding: 0 1rem;
+}
+
+.contact h2 {
+  font-size: 2.25rem;
+  color: #a94507;
+  margin-bottom: 1.75rem;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+}
+
+form {
+  background: #fffdfa;
+  padding: 2rem 2.5rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(183, 65, 14, 0.3);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #7a2f01;
+  user-select: none;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 2px solid #d9b38c;
+  border-radius: 8px;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  color: #3a2e2e;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: #b7410e;
+  box-shadow: 0 0 8px rgba(183, 65, 14, 0.6);
+  outline: none;
+}
+
+.error-message {
+  color: #d0342c;
+  font-size: 0.875rem;
+  min-height: 1em;
+  margin-top: 0.3rem;
+  user-select: none;
+}
+
+#form-feedback {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #a94507;
+  min-height: 1.25em;
+  text-align: center;
+  user-select: none;
+}
+
+/* Contact Info (address) */
+.contact-info {
+  margin-top: 2rem;
+  color: #5a4126;
+  font-size: 1rem;
+  font-style: normal;
+  line-height: 1.6;
+  text-align: center;
+  user-select: none;
+}
+
+.contact-info strong {
+  color: #7a2f01;
+}
+
+.contact-info a {
+  color: #b7410e;
+  font-weight: 600;
+}
+
+.contact-info a:hover,
+.contact-info a:focus {
+  color: #d95f27;
+  text-decoration: underline;
+  outline: none;
+}
+
+/* Footer */
+footer {
+  background-color: #8c3d02;
+  color: #fffdfa;
+  text-align: center;
+  padding: 1rem 1rem;
+  font-size: 0.9rem;
+  user-select: none;
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.15);
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .nav-menu {
+    position: fixed;
+    top: 58px;
+    right: 0;
+    background-color: #8c3d02;
+    height: calc(100vh - 58px);
+    flex-direction: column;
+    width: 220px;
+    padding-top: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: -4px 0 20px rgba(140, 61, 2, 0.9);
+    border-radius: 0 0 0 14px;
+  }
+
+  .nav-menu.active {
+    transform: translateX(0);
+  }
+
+  .nav-menu li {
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    font-size: 1rem;
+    padding: 0.65rem 1.2rem;
+  }
+
+  .menu-list {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-images img {
+    max-height: 280px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+```
+
+-------------
+
+FILE: script.js
+```js
+// Wait for DOM to load before running scripts
+document.addEventListener('DOMContentLoaded', () => {
+  // NAVIGATION TOGGLE FOR MOBILE
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('primary-menu');
+
+  navToggle.addEventListener('click', () => {
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+    navToggle.setAttribute('aria-expanded', !expanded);
+    navMenu.classList.toggle('active');
+  });
+
+  // COLLAPSE MOBILE MENU WHEN A LINK IS CLICKED
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', false);
+      }
+    });
+  });
+
+  // SMOOTH SCROLL FOR ALL INTERNAL LINKS
+  const internalLinks = document.querySelectorAll('a[href^="#"]');
+  internalLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const targetId = link.getAttribute('href').slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.focus({preventScroll:true});
+        targetElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+        // For accessibility, focus outline visible after smooth scroll
+      }
+    });
+  });
+
+  // INTERACTIVE MENU ITEMS: KEYBOARD + MOUSE INTERACTION
+  const menuItems = document.querySelectorAll('.menu-item');
+  menuItems.forEach(item => {
+    // On Enter or Space key, simulate click or maybe toggle details
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        item.click();
+      }
+    });
+
+    // Optional: click effect, like a flash or animation (can be added here if needed)
+  });
+
+  // GALLERY SLIDER FUNCTIONALITY
+  const galleryImagesWrapper = document.querySelector('.gallery-images');
+  const galleryImages = galleryImagesWrapper.querySelectorAll('img');
+  const prevBtn = document.querySelector('.gallery-prev');
+  const nextBtn = document.querySelector('.gallery-next');
+  let currentIndex = 0;
+
+  // Set initial visible image
+  function updateGallery() {
+    // Scroll galleryImagesWrapper to the current image smoothly
+    const imageWidth = galleryImages[0].clientWidth;
+    galleryImagesWrapper.scrollTo({
+      left: imageWidth * currentIndex,
+      behavior: 'smooth',
+    });
+    // Update aria-live region by setting aria-atomic on galleryImagesWrapper (already done)
+  }
+
+  function showNextImage() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    updateGallery();
+  }
+
+  function showPrevImage() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateGallery();
+  }
+
+  nextBtn.addEventListener('click', showNextImage);
+  prevBtn.addEventListener('click', showPrevImage);
+
+  // Keyboard support for gallery buttons
+  [prevBtn, nextBtn].forEach(button => {
+    button.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        button.click();
+      }
+    });
+  });
+
+  // Swipe support on gallery for touch devices
+  let startX = 0;
+  let isDragging = false;
+
+  galleryImagesWrapper.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  });
+
+  galleryImagesWrapper.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    let currentX = e.touches[0].clientX;
+    let diffX = startX - currentX;
+    // To avoid accidental swipe triggering while scrolling vertically, set threshold
+    if (Math.abs(diffX) > 30) {
+      if (diffX > 0) {
+        showNextImage();
+      } else {
+        showPrevImage();
+      }
+      isDragging = false;
+    }
+  });
+
+  galleryImagesWrapper.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  // FORM VALIDATION AND SUBMISSION HANDLING
+  const form = document.getElementById('contact-form');
+  const formFeedback = document.getElementById('form-feedback');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Clear previous errors and feedback
+    const errorMessages = form.querySelectorAll('.error-message');
+    errorMessages.forEach(span => {
+      span.textContent = '';
+    });
+    formFeedback.textContent = '';
+
+    let valid = true;
+
+    // Validate Name
+    const nameInput = form.elements['name'];
+    if (!nameInput.value.trim()) {
+      showError(nameInput, 'Please enter your name.');
+      valid = false;
+    }
+
+    // Validate Email
+    const emailInput = form.elements['email'];
+    if (!emailInput.value.trim()) {
+      showError(emailInput, 'Please enter your email.');
+      valid = false;
+    } else if (!isValidEmail(emailInput.value.trim())) {
+      showError(emailInput, 'Please enter a valid email address.');
+      valid = false;
+    }
+
+    // Validate Message
+    const messageInput = form.elements['message'];
+    if (!messageInput.value.trim()) {
+      showError(messageInput, 'Please enter a message.');
+      valid = false;
+    }
+
+    if (!valid) {
+      formFeedback.textContent = 'Please fix errors before submitting.';
+      formFeedback.style.color = '#d0342c'; // red
+      formFeedback.focus();
+      return;
+    }
+
+    // Simulate form submission
+    formFeedback.style.color = '#a94507'; // brand color brown/red
+    formFeedback.textContent = 'Sending message...';
+
+    // Simulate async delay (e.g., server request)
+    setTimeout(() => {
+      formFeedback.textContent = 'Thank you! Your message has been sent.';
+      form.reset();
+    }, 1500);
+  });
+
+  // Helper function to show error messages
+  function showError(inputElement, message) {
+    const errorSpan = inputElement.parentElement.querySelector('.error-message');
+    if (errorSpan) {
+      errorSpan.textContent = message;
+    }
+    inputElement.setAttribute('aria-invalid', 'true');
+    inputElement.focus();
+  }
+
+  // Helper function to validate email with simple regex
+  function isValidEmail(email) {
+    // RFC 5322 simple email regex approximation
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email.toLowerCase());
+  }
+});
+```
