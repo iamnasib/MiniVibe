@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="todo-app" aria-label="Todo List Application">
+      <h1 class="app-title">Todo App</h1>
+
+      <form id="todo-form" aria-labelledby="input-label">
+        <label id="input-label" for="todo-input" class="visually-hidden"
+          >Add a new todo</label
+        >
+        <input
+          type="text"
+          id="todo-input"
+          name="todo"
+          placeholder="What needs to be done?"
+          autocomplete="off"
+          aria-required="true" />
+        <button type="submit" aria-label="Add todo">Add</button>
+      </form>
+
+      <section
+        aria-live="polite"
+        aria-atomic="true"
+        class="todo-list-container">
+        <ul
+          id="todo-list"
+          class="todo-list"
+          aria-describedby="list-description"></ul>
+        <p id="list-description" class="visually-hidden">List of todos</p>
+      </section>
+
+      <section class="filters" role="group" aria-label="Filter todos">
+        <button
+          type="button"
+          class="filter-btn selected"
+          data-filter="all"
+          aria-pressed="true">
+          All
+        </button>
+        <button
+          type="button"
+          class="filter-btn"
+          data-filter="active"
+          aria-pressed="false">
+          Active
+        </button>
+        <button
+          type="button"
+          class="filter-btn"
+          data-filter="completed"
+          aria-pressed="false">
+          Completed
+        </button>
+      </section>
+    </main>
+    <script src="app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modern Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <noscript>
+      <div
+        role="alert"
+        style="
+          padding: 1rem;
+          background: #fff3cd;
+          color: #856404;
+          border: 1px solid #ffeeba;
+          margin: 1rem;
+          border-radius: 6px;
+        ">
+        This calculator requires JavaScript to function. Please enable
+        JavaScript in your browser.
+      </div>
+    </noscript>
+
+    <main
+      class="calculator"
+      id="calculator"
+      role="application"
+      aria-label="Calculator">
+      <header class="calculator-header">
+        <h1 class="visually-hidden">Calculator</h1>
+        <div class="top-controls">
+          <button
+            id="themeToggle"
+            class="btn theme-toggle"
+            aria-pressed="false"
+            aria-label="Toggle theme"
+            title="Toggle light/dark theme">
+            <span aria-hidden="true">🌓</span>
+            <span class="visually-hidden">Toggle theme</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="history" aria-label="Calculation history">
+        <div class="history-header">
+          <h2 class="history-title">History</h2>
+          <button
+            id="clearHistoryBtn"
+            class="btn action small"
+            data-action="clear-history"
+            aria-label="Clear history"
+            title="Clear history">
+            Clear
+          </button>
+        </div>
+        <div
+          class="history-list-wrapper"
+          tabindex="0"
+          aria-label="Previous calculations">
+          <ul
+            id="historyList"
+            class="history-list"
+            role="list"
+            aria-live="polite">
+            <!-- History items (li) appended here by JavaScript -->
+          </ul>
+        </div>
+      </section>
+
+      <section class="display" aria-label="Display">
+        <div
+          id="displayExpression"
+          class="expression"
+          aria-hidden="false"
+          tabindex="0">
+          0
+        </div>
+        <output
+          id="displayResult"
+          class="result"
+          aria-live="polite"
+          role="status"
+          >0</output
+        >
+      </section>
+
+      <section
+        class="keypad"
+        id="keypad"
+        role="group"
+        aria-label="Calculator keypad">
+        <!-- Row 1 -->
+        <button
+          class="btn action"
+          data-action="clear"
+          aria-label="Clear (C)"
+          title="Clear (Esc)">
+          C
+        </button>
+        <button
+          class="btn action"
+          data-action="delete"
+          aria-label="Delete (Backspace)"
+          title="Delete (Backspace)">
+          ⌫
+        </button>
+        <button
+          class="btn action"
+          data-action="percent"
+          aria-label="Percent"
+          title="Percent (%)">
+          %
+        </button>
+        <button
+          class="btn operator"
+          data-type="operator"
+          data-value="/"
+          aria-label="Divide"
+          title="Divide (/)">
+          ÷
+        </button>
+
+        <!-- Row 2 -->
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="7"
+          aria-label="Seven"
+          title="7">
+          7
+        </button>
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="8"
+          aria-label="Eight"
+          title="8">
+          8
+        </button>
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="9"
+          aria-label="Nine"
+          title="9">
+          9
+        </button>
+        <button
+          class="btn operator"
+          data-type="operator"
+          data-value="*"
+          aria-label="Multiply"
+          title="Multiply (*)">
+          ×
+        </button>
+
+        <!-- Row 3 -->
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="4"
+          aria-label="Four"
+          title="4">
+          4
+        </button>
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="5"
+          aria-label="Five"
+          title="5">
+          5
+        </button>
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="6"
+          aria-label="Six"
+          title="6">
+          6
+        </button>
+        <button
+          class="btn operator"
+          data-type="operator"
+          data-value="-"
+          aria-label="Subtract"
+          title="Subtract (-)">
+          −
+        </button>
+
+        <!-- Row 4 -->
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="1"
+          aria-label="One"
+          title="1">
+          1
+        </button>
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="2"
+          aria-label="Two"
+          title="2">
+          2
+        </button>
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="3"
+          aria-label="Three"
+          title="3">
+          3
+        </button>
+        <button
+          class="btn operator"
+          data-type="operator"
+          data-value="+"
+          aria-label="Add"
+          title="Add (+)">
+          +
+        </button>
+
+        <!-- Row 5 -->
+        <button
+          class="btn digit wide"
+          data-type="digit"
+          data-value="0"
+          aria-label="Zero"
+          title="0">
+          0
+        </button>
+        <button
+          class="btn digit"
+          data-type="digit"
+          data-value="."
+          aria-label="Decimal point"
+          title="Decimal point">
+          .
+        </button>
+        <button
+          class="btn equals"
+          data-action="equals"
+          aria-label="Equals"
+          title="Equals (Enter)">
+          =
+        </button>
+      </section>
+
+      <footer class="calculator-footer">
+        <div class="hints">
+          <small
+            >Keyboard: digits 0–9, + − * /, % for percent, Enter = evaluate,
+            Backspace = delete, Esc = clear</small
+          >
+        </div>
+        <div class="credit">
+          <small>Built with care • Accessible • Responsive</small>
+        </div>
+      </footer>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

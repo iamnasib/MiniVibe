@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0F1724" />
+    <meta
+      name="description"
+      content="X-Club — Premium gym membership, personal trainers, and flexible plans. Join X-Club today for results-driven fitness programs." />
+    <title>X-Club — Premium Gym & Trainers</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- Critical background color to avoid flash -->
+    <style>
+      :root {
+        background-color: #071028;
+      }
+      html,
+      body {
+        background-color: transparent;
+      }
+    </style>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Defer main script -->
+    <script defer src="script.js"></script>
+  </head>
+  <body class="page">
+    <!-- Skip link -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- SVG Sprite / Icons -->
+    <svg
+      aria-hidden="true"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+      focusable="false">
+      <defs>
+        <symbol id="icon-logo-x" viewBox="0 0 100 100">
+          <path
+            fill="currentColor"
+            d="M12 12 L88 88 M88 12 L12 88"
+            stroke="currentColor"
+            stroke-width="10"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        </symbol>
+        <symbol id="icon-dumbbell" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M3 11a1 1 0 011-1h1V9a1 1 0 011-1h2a1 1 0 011 1v1h6V9a1 1 0 011-1h2a1 1 0 011 1v1h1a1 1 0 011 1v2a1 1 0 01-1 1h-1v1a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1H9v1a1 1 0 01-1 1H6a1 1 0 01-1-1v-1H4a1 1 0 01-1-1v-2z" />
+        </symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M22 5.92c-.66.29-1.37.5-2.12.59a3.66 3.66 0 001.6-2.02 7.3 7.3 0 01-2.32.89 3.64 3.64 0 00-6.2 3.32A10.33 10.33 0 013 4.79a3.64 3.64 0 001.12 4.85 3.56 3.56 0 01-1.65-.46v.05a3.64 3.64 0 002.92 3.56c-.49.13-1 .2-1.52.08.43 1.31 1.67 2.26 3.14 2.29A7.3 7.3 0 013 19.54 10.32 10.32 0 008.84 21c6.68 0 10.34-5.54 10.34-10.34v-.47A7.3 7.3 0 0022 5.92z" />
+        </symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5.5A4.5 4.5 0 107.5 12 4.5 4.5 0 0012 7.5zm5.5-.75a1.125 1.125 0 11-1.125 1.125A1.125 1.125 0 0117.5 6.75z" />
+        </symbol>
+        <symbol id="icon-link" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M10.59 13.41a1 1 0 000 1.41l2 2a4 4 0 005.66 0 4 4 0 000-5.66l-1.41-1.41a1 1 0 10-1.41 1.41L16.83 12a2 2 0 010 2.83 2 2 0 01-2.83 0l-2-2a1 1 0 00-1.41 0zM6.34 6.34a4 4 0 010 5.66l1.41 1.41A1 1 0 0010.17 12l-1.41-1.41a2 2 0 010-2.83 2 2 0 012.83 0l2 2a1 1 0 001.41 0L16.66 6.34a4 4 0 00-5.66 0L9.59 8a1 1 0 01-1.41 0L6.34 6.34z" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- Header / Navigation -->
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a class="brand" href="#home" aria-label="X-Club Home">
+          <svg
+            class="logo"
+            width="44"
+            height="44"
+            viewBox="0 0 100 100"
+            aria-hidden="true">
+            <use href="#icon-logo-x" />
+          </svg>
+          <span class="brand-text">X-Club</span>
+        </a>
+
+        <nav
+          id="primary-nav"
+          class="primary-nav"
+          role="navigation"
+          aria-label="Primary"
+          data-mobile-hidden>
+          <ul class="nav-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#plans">Plans</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a class="btn btn-ghost" href="#plans">Join Now</a>
+          </div>
+        </nav>
+
+        <div class="header-actions">
+          <button
+            class="btn btn-primary header-join"
+            aria-label="Join X-Club"
+            onclick="location.href = '#plans'">
+            Join Now
+          </button>
+
+          <button
+            id="mobile-toggle"
+            class="hamburger"
+            aria-controls="mobile-nav"
+            aria-expanded="false"
+            aria-label="Open navigation">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile nav panel (progressive enhancement) -->
+      <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-inner">
+          <ul role="list" class="mobile-nav-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#plans">Plans</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div class="mobile-nav-cta">
+            <a class="btn btn-primary" href="#plans">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main" class="site-main" role="main">
+      <!-- Hero -->
+      <section id="home" class="hero" aria-label="Hero section">
+        <div
+          class="hero-bg"
+          role="img"
+          aria-label="Athlete lifting weights"
+          style="
+            background-image: url(&quot;https://images.unsplash.com/photo-1554284126-aa88f22d8c0b?q=80&w=1600&auto=format&fit=crop&quot;);
+          "></div>
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Welcome to</p>
+            <h1 class="hero-title">
+              X-Club — Transform Your Body, Elevate Your Mind
+            </h1>
+            <p class="hero-sub">
+              Science-backed programs, elite trainers, and flexible memberships
+              to suit your life. Start your first 7 days free.
+            </p>
+            <div class="hero-ctas">
+              <a class="btn btn-primary" href="#contact">Get Started</a>
+              <a class="btn btn-ghost" href="#plans">View Plans</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="false">
+            <!-- Decorative shapes -->
+            <svg
+              class="hero-shape"
+              width="220"
+              height="220"
+              viewBox="0 0 200 200"
+              aria-hidden="true">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1">
+                  <stop offset="0" stop-color="#FF7A59" />
+                  <stop offset="1" stop-color="#FF3D81" />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="80" fill="url(#g1)" opacity="0.12" />
+            </svg>
+
+            <!-- Accessible hero image fallback -->
+            <img
+              class="hero-photo"
+              src="https://images.unsplash.com/photo-1554284126-aa88f22d8c0b?q=80&w=600&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1554284126-aa88f22d8c0b?q=80&w=400 400w,
+                https://images.unsplash.com/photo-1554284126-aa88f22d8c0b?q=80&w=800 800w
+              "
+              sizes="(max-width:600px) 100vw, 50vw"
+              alt="Trainer helping a member lift barbell"
+              loading="lazy" />
+
+            <!-- Floating dumbbell accent -->
+            <div class="floating-accent" aria-hidden="true">
+              <svg width="56" height="56" viewBox="0 0 24 24">
+                <use href="#icon-dumbbell" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Membership Plans -->
+      <section
+        id="plans"
+        class="plans"
+        role="region"
+        aria-label="Membership plans">
+        <div class="container">
+          <header class="section-header">
+            <h2>Membership Plans</h2>
+            <p class="muted">
+              Flexible plans for every goal — pay monthly or save with yearly
+              billing.
+            </p>
+          </header>
+
+          <!-- Pricing toggle (segmented control) -->
+          <div
+            class="pricing-toggle"
+            role="tablist"
+            aria-label="Pricing toggle"
+            data-pricing-toggle>
+            <button
+              class="segmented-btn"
+              role="tab"
+              aria-pressed="true"
+              data-period="monthly">
+              Monthly
+            </button>
+            <button
+              class="segmented-btn"
+              role="tab"
+              aria-pressed="false"
+              data-period="yearly">
+              Yearly
+            </button>
+          </div>
+
+          <div class="plans-grid" role="list">
+            <article
+              class="plan-card"
+              role="article"
+              aria-label="Basic plan"
+              data-price-month="19"
+              data-price-year="190">
+              <div class="plan-header">
+                <div class="plan-icon" aria-hidden="true">
+                  <svg width="40" height="40" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M4 6h16v2H4zM6 10h12v8H6z" />
+                  </svg>
+                </div>
+                <h3 class="plan-name">Basic</h3>
+                <span class="badge" aria-hidden="true">Starter</span>
+              </div>
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="price-value" aria-live="polite">19</span>
+                <span class="per">/mo</span>
+              </div>
+              <ul class="plan-perks">
+                <li>Gym access during staffed hours</li>
+                <li>Group classes</li>
+                <li>Locker room access</li>
+              </ul>
+              <div class="plan-actions">
+                <a class="btn btn-primary" href="#contact" data-plan="Basic"
+                  >Choose Basic</a
+                >
+                <a
+                  class="link link-small"
+                  href="#"
+                  data-plan-compare
+                  data-plan="Basic"
+                  >Compare</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="plan-card popular"
+              role="article"
+              aria-label="Pro plan"
+              data-price-month="49"
+              data-price-year="490">
+              <div class="plan-header">
+                <div class="plan-icon" aria-hidden="true">
+                  <svg width="40" height="40" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M2 12h20v2H2zM7 7h10v2H7zM7 15h10v2H7z" />
+                  </svg>
+                </div>
+                <h3 class="plan-name">Pro</h3>
+                <span class="badge badge-popular" aria-label="Popular"
+                  >Popular</span
+                >
+              </div>
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="price-value" aria-live="polite">49</span>
+                <span class="per">/mo</span>
+              </div>
+              <ul class="plan-perks">
+                <li>24/7 Gym access</li>
+                <li>5 Personal training sessions</li>
+                <li>Premium equipment & recovery</li>
+              </ul>
+              <div class="plan-actions">
+                <a class="btn btn-primary" href="#contact" data-plan="Pro"
+                  >Choose Pro</a
+                >
+                <a
+                  class="link link-small"
+                  href="#"
+                  data-plan-compare
+                  data-plan="Pro"
+                  >Compare</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="plan-card"
+              role="article"
+              aria-label="Elite plan"
+              data-price-month="89"
+              data-price-year="890">
+              <div class="plan-header">
+                <div class="plan-icon" aria-hidden="true">
+                  <svg width="40" height="40" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M12 2l3 7h7l-5.5 4.2L20 22l-8-5-8 5 1.5-8.8L0 9h7z" />
+                  </svg>
+                </div>
+                <h3 class="plan-name">Elite</h3>
+                <span class="badge" aria-hidden="true">All Access</span>
+              </div>
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="price-value" aria-live="polite">89</span>
+                <span class="per">/mo</span>
+              </div>
+              <ul class="plan-perks">
+                <li>Unlimited personal training</li>
+                <li>Nutrition coaching</li>
+                <li>Spa & recovery access</li>
+              </ul>
+              <div class="plan-actions">
+                <a class="btn btn-primary" href="#contact" data-plan="Elite"
+                  >Choose Elite</a
+                >
+                <a
+                  class="link link-small"
+                  href="#"
+                  data-plan-compare
+                  data-plan="Elite"
+                  >Compare</a
+                >
+              </div>
+            </article>
+          </div>
+
+          <p class="muted small">
+            Annual billing gives two months free compared to monthly pricing.
+            <a href="#" data-plan-compare-all>See full comparison</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- Trainers -->
+      <section
+        id="trainers"
+        class="trainers"
+        role="region"
+        aria-label="Meet our trainers">
+        <div class="container">
+          <header class="section-header">
+            <h2>Our Trainers</h2>
+            <p class="muted">World-class coaches to push you to your best.</p>
+          </header>
+
+          <div class="trainers-grid">
+            <article
+              class="trainer-card"
+              data-index="0"
+              tabindex="0"
+              role="article"
+              aria-expanded="false">
+              <div class="trainer-media">
+                <img
+                  src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop"
+                  srcset="
+                    https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300 300w,
+                    https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600 600w
+                  "
+                  sizes="(max-width:600px) 100vw, 33vw"
+                  loading="lazy"
+                  alt="Portrait of trainer Mia"
+                  class="trainer-photo" />
+              </div>
+              <div class="trainer-body">
+                <h3 class="trainer-name">Mia Rivera</h3>
+                <p class="trainer-specialty">Strength & Conditioning</p>
+                <p class="trainer-bio">
+                  Mia blends powerlifting foundations with mobility coaching to
+                  build strength safely and sustainably.
+                </p>
+                <div class="trainer-actions">
+                  <a
+                    class="btn btn-outline"
+                    href="#contact"
+                    data-trainer="Mia Rivera"
+                    >Book a Trial</a
+                  >
+                  <div class="socials" aria-hidden="true">
+                    <a href="#"
+                      ><svg width="20" height="20">
+                        <use href="#icon-twitter" /></svg
+                    ></a>
+                    <a href="#"
+                      ><svg width="20" height="20">
+                        <use href="#icon-instagram" /></svg
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="trainer-card"
+              data-index="1"
+              tabindex="0"
+              role="article"
+              aria-expanded="false">
+              <div class="trainer-media">
+                <img
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop"
+                  srcset="
+                    https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300 300w,
+                    https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600 600w
+                  "
+                  sizes="(max-width:600px) 100vw, 33vw"
+                  loading="lazy"
+                  alt="Portrait of trainer Liam"
+                  class="trainer-photo" />
+              </div>
+              <div class="trainer-body">
+                <h3 class="trainer-name">Liam Chen</h3>
+                <p class="trainer-specialty">HIIT & Metabolic Training</p>
+                <p class="trainer-bio">
+                  Liam creates high-energy, results-driven workouts designed to
+                  burn fat and build endurance.
+                </p>
+                <div class="trainer-actions">
+                  <a
+                    class="btn btn-outline"
+                    href="#contact"
+                    data-trainer="Liam Chen"
+                    >Book a Trial</a
+                  >
+                  <div class="socials" aria-hidden="true">
+                    <a href="#"
+                      ><svg width="20" height="20">
+                        <use href="#icon-twitter" /></svg
+                    ></a>
+                    <a href="#"
+                      ><svg width="20" height="20">
+                        <use href="#icon-instagram" /></svg
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="trainer-card"
+              data-index="2"
+              tabindex="0"
+              role="article"
+              aria-expanded="false">
+              <div class="trainer-media">
+                <img
+                  src="https://images.unsplash.com/photo-1546491767-3a3f2a1d1988?q=80&w=600&auto=format&fit=crop"
+                  srcset="
+                    https://images.unsplash.com/photo-1546491767-3a3f2a1d1988?q=80&w=300 300w,
+                    https://images.unsplash.com/photo-1546491767-3a3f2a1d1988?q=80&w=600 600w
+                  "
+                  sizes="(max-width:600px) 100vw, 33vw"
+                  loading="lazy"
+                  alt="Portrait of trainer Zoe"
+                  class="trainer-photo" />
+              </div>
+              <div class="trainer-body">
+                <h3 class="trainer-name">Zoe Patel</h3>
+                <p class="trainer-specialty">Yoga & Recovery</p>
+                <p class="trainer-bio">
+                  Zoe focuses on restoring balance and improving mobility so you
+                  can train harder and recover faster.
+                </p>
+                <div class="trainer-actions">
+                  <a
+                    class="btn btn-outline"
+                    href="#contact"
+                    data-trainer="Zoe Patel"
+                    >Book a Trial</a
+                  >
+                  <div class="socials" aria-hidden="true">
+                    <a href="#"
+                      ><svg width="20" height="20">
+                        <use href="#icon-twitter" /></svg
+                    ></a>
+                    <a href="#"
+                      ><svg width="20" height="20">
+                        <use href="#icon-instagram" /></svg
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section
+        id="contact"
+        class="contact"
+        role="region"
+        aria-label="Contact us">
+        <div class="container contact-grid">
+          <div class="contact-details">
+            <h2>Contact Us</h2>
+            <address>
+              <p>
+                <strong>X-Club Fitness</strong><br />123 Iron Street<br />Metropolis,
+                XY 12345
+              </p>
+              <p>
+                Phone: <a href="tel:+15551234567">+1 (555) 123-4567</a><br />
+                Email:
+                <a href="mailto:hello@x-club.example">hello@x-club.example</a>
+              </p>
+              <p>Hours: Mon–Fri 5:00am–11:00pm, Sat–Sun 6:00am–8:00pm</p>
+            </address>
+
+            <p>
+              <a
+                class="map-link"
+                href="https://www.google.com/maps?q=123+Iron+Street"
+                target="_blank"
+                rel="noopener"
+                >View on Google Maps</a
+              >
+            </p>
+
+            <div class="contact-small">
+              <p class="muted">
+                Prefer a quick chat? <a href="tel:+15551234567">Call us</a> or
+                book a free trial with one of our trainers.
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-form-wrap">
+            <form
+              id="contact-form"
+              class="contact-form"
+              action="mailto:hello@x-club.example"
+              method="post"
+              aria-labelledby="contact-form-title">
+              <h3 id="contact-form-title">Send us a message</h3>
+
+              <!-- Honeypot (invisible to users) -->
+              <label class="visually-hidden" for="hp-field"
+                >Leave this field empty</label
+              >
+              <input
+                type="text"
+                id="hp-field"
+                name="hp_field"
+                class="honeypot"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true" />
+
+              <div class="form-row">
+                <label for="name"
+                  >Full name <span aria-hidden="true">*</span></label
+                >
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  placeholder="Jane Doe"
+                  aria-describedby="name-help" />
+                <div id="name-help" class="field-help">Required</div>
+              </div>
+
+              <div class="form-row">
+                <label for="email"
+                  >Email <span aria-hidden="true">*</span></label
+                >
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  inputmode="email"
+                  required
+                  placeholder="you@example.com"
+                  aria-describedby="email-help" />
+                <div id="email-help" class="field-help">
+                  We'll reply within 24 hours
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label for="phone">Phone (optional)</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputmode="tel"
+                  placeholder="+1 (555) 555-5555"
+                  aria-describedby="phone-help" />
+                <div id="phone-help" class="field-help">
+                  Optional — for booking calls
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label for="plan-select">Preferred plan</label>
+                <select id="plan-select" name="plan">
+                  <option value="">No preference</option>
+                  <option value="Basic">Basic</option>
+                  <option value="Pro">Pro</option>
+                  <option value="Elite">Elite</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label for="message"
+                  >Message <span aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Tell us how we can help"
+                  aria-describedby="message-help"></textarea>
+                <div id="message-help" class="field-help">Required</div>
+              </div>
+
+              <div class="form-row form-actions">
+                <button type="submit" class="btn btn-primary">
+                  Send message
+                </button>
+                <div
+                  id="form-status"
+                  class="form-status"
+                  aria-live="polite"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal / Plan comparison (hidden by default) -->
+    <div
+      id="modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="modal-title">
+      <div class="modal-overlay" data-modal-close></div>
+      <div class="modal-panel">
+        <header class="modal-header">
+          <h3 id="modal-title">Plan comparison</h3>
+          <button class="modal-close" data-modal-close aria-label="Close">
+            ×
+          </button>
+        </header>
+        <div class="modal-body" id="modal-body">
+          <p>Loading comparison…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast / success banner -->
+    <div
+      id="toast"
+      class="toast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"></div>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          <a class="brand footer-brand" href="#home" aria-label="X-Club home">
+            <svg
+              class="logo"
+              width="34"
+              height="34"
+              viewBox="0 0 100 100"
+              aria-hidden="true">
+              <use href="#icon-logo-x" />
+            </svg>
+            <span class="brand-text">X-Club</span>
+          </a>
+          <p class="muted">
+            © <span id="year">2026</span> X-Club. All rights reserved.
+          </p>
+        </div>
+
+        <nav class="footer-nav" role="navigation" aria-label="Footer">
+          <ul>
+            <li><a href="#plans">Plans</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter"
+            ><svg width="18" height="18"><use href="#icon-twitter" /></svg
+          ></a>
+          <a href="#" aria-label="Instagram"
+            ><svg width="18" height="18"><use href="#icon-instagram" /></svg
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      aria-hidden="true"
+      title="Back to top">
+      ↑
+    </button>
+
+    <!-- Accessibility helpers -->
+    <div
+      id="live-region"
+      class="visually-hidden"
+      aria-live="polite"
+      aria-atomic="true"></div>
+  </body>
+</html>

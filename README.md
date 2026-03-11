@@ -16,11 +16,13 @@ MiniVibe is a mini and simplified version of the vibe-coding platforms, created 
 
 ## Features
 
+- **Validation and Tech stack Decider**: Validates the user prompt and decides the tech stack to be used for the project
 - **Intelligent Planning**: Automatically determines what files are needed for your project
 - **Sequential Code Generation**: Generates files in order with context awareness
 - **Multi-step Workflow**: Uses LangGraph's state management for complex orchestration
 - **Structured Output**: Leverages Pydantic models for reliable LLM responses
 - **Context Preservation**: Each file generation considers previously created files
+- **Evaluation and Refinement**: Evaluates generated code and allows for regeneration if quality is low
 - **Complete Project Output**: Currently only generates a single `txt` file with the complete code
 
 ## Tech Stack
@@ -36,28 +38,36 @@ MiniVibe is a mini and simplified version of the vibe-coding platforms, created 
 The workflow implements a graph-based state machine with the following nodes:
 
 ```
-START → Orchestrator → Router ⟷ Generate File → Synthesizer → END
-                         ↓
-                    (loops until all files generated)
+START → Validator & Tech Stack decision → Orchestrator → Router ⟷ Generate File → Evaluator & Refinement Decision → Synthesizer → END
+                                                            ↓
+                                             (loops until all files generated)
 ```
 
 **Workflow Nodes:**
 
-1. **Orchestrator**:
-   - Takes user prompt
+1. **Validator & Tech Stack Decision**:
+   - Validates user prompt
+   - Determines appropriate tech stack based on project requirements
+
+2. **Orchestrator**:
    - Uses structured output to generate a file plan
    - Returns ordered list of files to create
 
-2. **Router**:
+3. **Router**:
    - Checks if all files have been generated
    - Routes to either `generate_file` or `synthesizer`
 
-3. **Generate File**:
+4. **Generate File**:
    - Generates code for current file
    - Maintains context from previously generated files
    - Increments file counter
 
-4. **Synthesizer**:
+5. **Evaluator & Refinement Decision**:
+   - Evaluates generated code quality
+   - If score is low, routes back to `generate_file` for regeneration
+   - If score is good, moves to next file or synthesizer
+
+6. **Synthesizer**:
    - Combines all generated files
    - Formats output with file separators
    - Writes final code to `code.txt`
@@ -66,9 +76,13 @@ START → Orchestrator → Router ⟷ Generate File → Synthesizer → END
 The workflow maintains state across all nodes including:
 
 - User prompt
+- Tech stack
 - List of planned files
 - Current file index
-- Completed files with code
+- Current generated file
+- Generated files with code
+- Evaluations of generated files
+- Next step in the workflow
 - Final synthesized output
 
 ## Installation
@@ -113,9 +127,9 @@ The workflow maintains state across all nodes including:
 
 ## Usage
 
-### Current Version (v0.1)
+### Current Version (v0.2)
 
-Currently, the project uses a hardcoded prompt in `main.py`. To use:
+To use:
 
 1. **Run the script**:
 
@@ -123,12 +137,10 @@ Currently, the project uses a hardcoded prompt in `main.py`. To use:
    python main.py
    ```
 
-2. **Modify the prompt** (at the end in main.py):
+2. **Enter the prompt in the CLI when prompted**:
 
-   ```python
-   state = worker.invoke({
-       "prompt": "Your project description here"
-   })
+   ```bash
+   Enter your prompt here:
    ```
 
 3. **Output**: Generated code will be saved to `code.txt` in the project directory
@@ -139,21 +151,11 @@ The tool will:
 
 1. Print the file plan to console
 2. Show generation progress for each file
-3. Save all generated code to `code.txt` with file separators:
+3. There may other print statements as this is a learning project and I have added print statements to understand the flow and for debugging purposes
+4. Save all generated code to `code.txt` with file separator:
 
 ```
-FILE: index.html
-...
-
--------------
-
-FILE: styles.css
-...
-
--------------
-
-FILE: script.js
-...
+-----NEW FILE-----
 ```
 
 ## Contributing
@@ -166,11 +168,10 @@ Feedback and suggestions are welcome! If you try this project or review the code
 
 ## Known Limitations
 
-- **Hardcoded prompt**: Must edit `main.py` to change project description (v0.1)
 - **Single output file**: All code saved to one `code.txt` instead of separate files
 - **No error handling**: Limited validation of generated code
-- **Fixed model**: Currently uses GPT-4.1-mini only
-- **No iterative refinement**: Single-pass generation without review/revision cycles
+- **Fixed model**: Currently uses GPT-5-mini only
+- **No parallel generation**: Files generated sequentially, no fan-out implemented
 
 ## Troubleshooting
 
@@ -179,7 +180,7 @@ Feedback and suggestions are welcome! If you try this project or review the code
 1. **"OpenAI API Error"**
    - Ensure your API key is correctly set in `.env`
    - Check you have sufficient API credits
-   - Verify the model name is correct (gpt-4.1-mini)
+   - Verify the model name is correct (gpt-5-mini)
 
 2. **"Module not found"**
    - Make sure you've installed all requirements: `pip install -r requirements.txt`
@@ -211,9 +212,10 @@ MIT License - feel free to use this for learning purposes.
 
 ## Version History
 
-| Version | Date              | Changes         |
-| ------- | ----------------- | --------------- |
-| 0.1     | February 14, 2026 | Initial release |
+| Version | Date              | Changes                                            |
+| ------- | ----------------- | -------------------------------------------------- |
+| 0.1     | February 14, 2026 | Initial release                                    |
+| 0.2     | March 12, 2026    | Added validation, tech stack decider and evaluator |
 
 ---
 

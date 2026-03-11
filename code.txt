@@ -1,571 +1,968 @@
-FILE: index.html
-```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Todo App</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern Calculator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="todo-app">
-    <h1 class="app-title">Todo App</h1>
-    <form id="todo-form" aria-label="Add new todo">
-      <input
-        type="text"
-        id="todo-input"
-        placeholder="What needs to be done?"
-        autocomplete="off"
-        aria-label="New todo"
-        required
-      />
-      <button type="submit" id="add-todo-btn" aria-label="Add todo">Add</button>
-    </form>
+  <noscript>
+    <div role="alert" style="padding:1rem;background:#fff3cd;color:#856404;border:1px solid #ffeeba;margin:1rem;border-radius:6px;">
+      This calculator requires JavaScript to function. Please enable JavaScript in your browser.
+    </div>
+  </noscript>
 
-    <section class="todo-container" aria-live="polite" aria-relevant="additions removals">
-      <ul id="todo-list" class="todo-list"></ul>
-    </section>
-
-    <section class="todo-footer" aria-label="Todo list controls">
-      <span id="todo-count" class="todo-count" aria-live="polite" aria-atomic="true">0 items left</span>
-      <div class="filters" role="group" aria-label="Filter todos">
-        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-        <button type="button" class="filter-btn" data-filter="active" aria-pressed="false">Active</button>
-        <button type="button" class="filter-btn" data-filter="completed" aria-pressed="false">Completed</button>
+  <main class="calculator" id="calculator" role="application" aria-label="Calculator">
+    <header class="calculator-header">
+      <h1 class="visually-hidden">Calculator</h1>
+      <div class="top-controls">
+        <button id="themeToggle" class="btn theme-toggle" aria-pressed="false" aria-label="Toggle theme" title="Toggle light/dark theme">
+          <span aria-hidden="true">🌓</span>
+          <span class="visually-hidden">Toggle theme</span>
+        </button>
       </div>
-      <button type="button" id="clear-completed" class="clear-btn">Clear Completed</button>
+    </header>
+
+    <section class="history" aria-label="Calculation history">
+      <div class="history-header">
+        <h2 class="history-title">History</h2>
+        <button id="clearHistoryBtn" class="btn action small" data-action="clear-history" aria-label="Clear history" title="Clear history">Clear</button>
+      </div>
+      <div class="history-list-wrapper" tabindex="0" aria-label="Previous calculations">
+        <ul id="historyList" class="history-list" role="list" aria-live="polite">
+          <!-- History items (li) appended here by JavaScript -->
+        </ul>
+      </div>
     </section>
+
+    <section class="display" aria-label="Display">
+      <div id="displayExpression" class="expression" aria-hidden="false" tabindex="0">0</div>
+      <output id="displayResult" class="result" aria-live="polite" role="status">0</output>
+    </section>
+
+    <section class="keypad" id="keypad" role="group" aria-label="Calculator keypad">
+      <!-- Row 1 -->
+      <button class="btn action" data-action="clear" aria-label="Clear (C)" title="Clear (Esc)">C</button>
+      <button class="btn action" data-action="delete" aria-label="Delete (Backspace)" title="Delete (Backspace)">⌫</button>
+      <button class="btn action" data-action="percent" aria-label="Percent" title="Percent (%)">%</button>
+      <button class="btn operator" data-type="operator" data-value="/" aria-label="Divide" title="Divide (/)">÷</button>
+
+      <!-- Row 2 -->
+      <button class="btn digit" data-type="digit" data-value="7" aria-label="Seven" title="7">7</button>
+      <button class="btn digit" data-type="digit" data-value="8" aria-label="Eight" title="8">8</button>
+      <button class="btn digit" data-type="digit" data-value="9" aria-label="Nine" title="9">9</button>
+      <button class="btn operator" data-type="operator" data-value="*" aria-label="Multiply" title="Multiply (*)">×</button>
+
+      <!-- Row 3 -->
+      <button class="btn digit" data-type="digit" data-value="4" aria-label="Four" title="4">4</button>
+      <button class="btn digit" data-type="digit" data-value="5" aria-label="Five" title="5">5</button>
+      <button class="btn digit" data-type="digit" data-value="6" aria-label="Six" title="6">6</button>
+      <button class="btn operator" data-type="operator" data-value="-" aria-label="Subtract" title="Subtract (-)">−</button>
+
+      <!-- Row 4 -->
+      <button class="btn digit" data-type="digit" data-value="1" aria-label="One" title="1">1</button>
+      <button class="btn digit" data-type="digit" data-value="2" aria-label="Two" title="2">2</button>
+      <button class="btn digit" data-type="digit" data-value="3" aria-label="Three" title="3">3</button>
+      <button class="btn operator" data-type="operator" data-value="+" aria-label="Add" title="Add (+)">+</button>
+
+      <!-- Row 5 -->
+      <button class="btn digit wide" data-type="digit" data-value="0" aria-label="Zero" title="0">0</button>
+      <button class="btn digit" data-type="digit" data-value="." aria-label="Decimal point" title="Decimal point">.</button>
+      <button class="btn equals" data-action="equals" aria-label="Equals" title="Equals (Enter)">=</button>
+    </section>
+
+    <footer class="calculator-footer">
+      <div class="hints">
+        <small>Keyboard: digits 0–9, + − * /, % for percent, Enter = evaluate, Backspace = delete, Esc = clear</small>
+      </div>
+      <div class="credit">
+        <small>Built with care • Accessible • Responsive</small>
+      </div>
+    </footer>
   </main>
 
-  <script src="app.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
-```
 
--------------
+-----NEW FILE-----
 
-FILE: styles.css
-```css
-/* Reset & base styles */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/*
+  style.css
+  Modern responsive calculator styles
+  JS hooks referenced in comments: #displayExpression, #displayResult, #historyList, .btn, .operator, .equals, #themeToggle, .history-item
+*/
+
+:root{
+  /* Light theme palette */
+  --bg: #f5f7fb; /* app background */
+  --surface: #ffffff; /* surfaces like calculator card */
+  --primary: #0b5fff; /* primary accent / equals */
+  --accent: #10b981; /* secondary accent (operators) */
+  --text: #0b1b2b; /* primary text */
+  --muted: #5b6b7a; /* secondary text */
+  --danger: #ef4444; /* errors / clear */
+  --shadow: 0 6px 20px rgba(8,20,45,0.06);
+  --glass: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  --focus-ring: 3px rgba(11,95,255,0.18);
+
+  --max-width: 480px;
+  --gap: 12px;
+  --btn-radius: 10px;
+  --btn-min-size: 56px; /* touch target */
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size: 16px;
+  line-height: 1.25;
 }
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 2rem 1rem;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Dark theme variables (toggle by adding .dark-theme to <body>) */
+body.dark-theme{
+  --bg: #0b1220;
+  --surface: #0f1724;
+  --primary: #7cc0ff;
+  --accent: #34d399;
+  --text: #e6eef8;
+  --muted: #98a6b3;
+  --danger: #ff7b7b;
+  --shadow: 0 6px 20px rgba(0,0,0,0.6);
+  --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  --focus-ring: 3px rgba(124,192,255,0.12);
 }
 
-.todo-app {
-  background: #fff;
-  width: 100%;
-  max-width: 480px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  padding: 2rem 2.5rem 2.5rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+/* Global resets and accessibility */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
 }
 
-/* Title */
-.app-title {
-  margin: 0 0 0.5rem 0;
-  font-weight: 700;
-  color: #22a6b3;
-  font-size: 2.25rem;
-  user-select: none;
-  text-align: center;
+/* Utility: visually-hidden / sr-only for accessibility */
+.visually-hidden, .sr-only{
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-/* Form */
-#todo-form {
-  display: flex;
-  gap: 0.75rem;
+/* Calculator container */
+.calculator{
+  width:100%;
+  max-width:var(--max-width);
+  background:linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--surface) 96%, var(--bg)) );
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:18px;
+  display:grid;
+  grid-template-rows:auto auto 1fr auto; /* header, history, display+keypad handled below */
+  gap:12px;
 }
 
-#todo-input {
-  flex-grow: 1;
-  padding: 0.75rem 1rem;
-  font-size: 1.125rem;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  outline-offset: 2px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* Header / top controls */
+.calculator-header{display:flex;align-items:center;justify-content:space-between}
+.top-controls{display:flex;gap:8px;align-items:center}
+
+#themeToggle{ /* JS hook: #themeToggle */
+  background:transparent;border:0;padding:8px;border-radius:8px;color:var(--muted);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;font-size:18px;
+}
+#themeToggle:focus{outline: none; box-shadow: 0 0 0 var(--focus-ring); border-radius:8px}
+
+/* History area */
+.history{
+  background:transparent;
+}
+.history-header{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:8px
+}
+.history-title{font-size:0.85rem;color:var(--muted);margin:0}
+
+#clearHistoryBtn{ /* small unobtrusive clear history */
+  background:transparent;border:0;color:var(--muted);padding:6px 8px;border-radius:8px;cursor:pointer;font-size:0.85rem
+}
+#clearHistoryBtn:hover{color:var(--text);background:color-mix(in srgb, var(--text) 6%, transparent)}
+#clearHistoryBtn:focus{outline:none;box-shadow:0 0 0 var(--focus-ring)}
+
+.history-list-wrapper{
+  max-height:96px; overflow:auto;border-radius:10px;padding:6px;background:transparent;
 }
 
-#todo-input:focus {
-  border-color: #22a6b3;
-  box-shadow: 0 0 8px rgba(34,166,179,0.4);
+.history-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+
+/* Each history item - clickable to recall */
+.history-item{
+  display:flex;flex-direction:column;gap:2px;padding:8px;border-radius:8px;cursor:pointer;
+  background:color-mix(in srgb, var(--surface) 90%, var(--bg));
+  border:1px solid transparent;
+}
+.history-item:hover{background:color-mix(in srgb, var(--surface) 84%, var(--bg));box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02)}
+.history-item:active{transform:translateY(1px)}
+.history-item .hist-expr{font-size:0.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-item .hist-res{font-size:0.95rem;color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Display area */
+.display{
+  background:var(--surface);
+  padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:6px;align-items:stretch;justify-content:center;
+  min-height:88px;
+}
+.expression{ /* #displayExpression JS hook */
+  color:var(--muted);font-size:0.95rem;text-align:right;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:4px
 }
 
-#add-todo-btn {
-  background-color: #22a6b3;
-  border: none;
-  color: white;
-  font-weight: 700;
-  font-size: 1.125rem;
-  padding: 0 1.25rem;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(34,166,179,0.3);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
+.result{ /* #displayResult JS hook (aria-live) */
+  text-align:right;font-weight:700;font-size:clamp(1.45rem, 6vw, 2.4rem);color:var(--text);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:4px
 }
 
-#add-todo-btn:hover,
-#add-todo-btn:focus {
-  background-color: #1c8895;
-  box-shadow: 0 6px 12px rgba(28,136,149,0.5);
+/* Keypad grid */
+.keypad{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch;
 }
 
-/* Todo list */
-.todo-container {
-  max-height: 400px;
-  overflow-y: auto;
-  padding-right: 4px;
-  border-radius: 6px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.03);
-  background-color: #fafafa;
-  transition: max-height 0.3s ease;
+/* Buttons - primary class .btn used by JS */
+.btn{
+  appearance:none;border:0;background:color-mix(in srgb, var(--surface) 92%, var(--bg));
+  padding:0;min-height:var(--btn-min-size);min-width:var(--btn-min-size);border-radius:var(--btn-radius);
+  display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem;color:var(--text);cursor:pointer;box-shadow:0 2px 6px rgba(2,6,23,0.04);transition:transform .06s ease, box-shadow .12s ease, background .12s ease, color .12s ease;
 }
 
-#todo-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.btn:active{transform:translateY(1px)}
+.btn:focus{outline:none;box-shadow:0 0 0 var(--focus-ring);border-radius:var(--btn-radius)}
+
+/* Digit buttons */
+.digit{background:linear-gradient(180deg, color-mix(in srgb, var(--surface) 97%, var(--bg)), var(--surface));}
+.digit:hover{background:color-mix(in srgb, var(--surface) 92%, var(--bg))}
+
+/* Operator buttons (÷ × - +) */
+.operator{
+  background:linear-gradient(180deg,color-mix(in srgb, var(--accent) 14%, var(--surface)), color-mix(in srgb, var(--accent) 8%, var(--surface)));
+  color:var(--text);
+  font-weight:600;
+}
+.operator:hover{filter:brightness(.98)}
+
+/* Action buttons: clear, delete, percent */
+.action{background:linear-gradient(180deg,color-mix(in srgb, var(--surface) 95%, var(--bg)),var(--surface));color:var(--muted);}
+.action:hover{background:color-mix(in srgb, var(--surface) 90%, var(--bg));color:var(--text)}
+
+/* Clear button emphasised (uses danger color) */
+.action[data-action="clear"]{color:var(--danger);font-weight:600}
+.action[data-action="clear"]:hover{background:color-mix(in srgb, var(--danger) 6%, var(--surface))}
+
+/* Equals button more prominent */
+.equals{
+  background:linear-gradient(180deg, var(--primary), color-mix(in srgb, var(--primary) 86%, black));
+  color:white;font-weight:700;font-size:1.05rem;box-shadow:0 8px 18px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.equals:hover{filter:brightness(.98)}
+.equals:active{transform:translateY(1px) scale(.998)}
+
+/* Make 0 wide (spans two columns) - matches .wide in HTML */
+.btn.wide{grid-column:span 2;display:flex;justify-content:flex-start;padding-left:20px}
+
+/* Responsive tweak: allow equals to span one row on small screens if desired */
+/* In the provided HTML equals is last cell; we keep natural flow but style to be visually larger. */
+
+/* Focus visible for keyboard users (strong contrast) */
+@media (forced-colors: none){
+  .btn:focus{box-shadow:0 0 0 var(--focus-ring)}
 }
 
-/* Todo item */
-.todo-item {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
+/* Error state class for display (applied by JS via .error on .display) */
+.display.error{border:1px solid color-mix(in srgb, var(--danger) 24%, transparent);}
+.display.error .result{color:var(--danger)}
+
+/* Small footer */
+.calculator-footer{display:flex;align-items:center;justify-content:space-between;padding-top:6px}
+.calculator-footer small{color:var(--muted)}
+
+/* Scrollbar styles for history list (subtle) */
+.history-list-wrapper::-webkit-scrollbar{height:8px;width:8px}
+.history-list-wrapper::-webkit-scrollbar-thumb{background:color-mix(in srgb, var(--muted) 14%, transparent);border-radius:6px}
+.history-list-wrapper::-webkit-scrollbar-track{background:transparent}
+
+/* Media queries: scale up on larger screens and ensure touch sizes on small screens */
+@media (min-width:520px){
+  body{padding:40px}
+  .calculator{padding:22px;gap:16px}
+  .history-list-wrapper{max-height:120px}
+  .result{font-size:clamp(1.6rem, 4.2vw, 2.8rem)}
 }
 
-.todo-item:hover {
-  background-color: #f0f8fa;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+@media (max-width:420px){
+  :root{--gap:10px;--btn-min-size:54px}
+  .calculator{padding:12px}
+  .history-list-wrapper{max-height:76px}
+  .display{min-height:80px;padding:10px}
+  .btn{min-height:48px;min-width:48px}
+  .btn.wide{padding-left:16px}
 }
 
-/* Checkbox */
-.todo-item input[type='checkbox'] {
-  width: 20px;
-  height: 20px;
-  margin-right: 1rem;
-  cursor: pointer;
-  accent-color: #22a6b3;
-  flex-shrink: 0;
-}
+/* Make sure color contrast on operators & equals remains sufficient */
+/* Operators & equals should always show readable text in both themes */
+.operator, .equals{color:color-mix(in srgb, var(--surface) 96%, var(--text))}
 
-/* Text */
-.todo-text {
-  flex-grow: 1;
-  font-size: 1.125rem;
-  color: #333;
-  word-break: break-word;
-  user-select: text;
-  transition: color 0.3s ease;
-}
+/* Small helper for disabled buttons (used by JS to disable when error) */
+.btn[disabled]{opacity:0.6;cursor:not-allowed;filter:grayscale(.06)}
 
-/* Completed state */
-.todo-item.completed .todo-text {
-  text-decoration: line-through;
-  color: #999;
-}
-
-/* Delete button */
-.delete-btn {
-  background: transparent;
-  border: none;
-  color: #e74c3c;
-  cursor: pointer;
-  font-size: 1.25rem;
-  transition: color 0.3s ease;
-  padding: 0.15rem 0.3rem;
-  border-radius: 4px;
-  user-select: none;
-  flex-shrink: 0;
-}
-
-.delete-btn:hover,
-.delete-btn:focus {
-  color: #c0392b;
-  outline: none;
-  background: rgba(231,76,60, 0.1);
-}
-
-/* Footer */
-.todo-footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: #555;
-  user-select: none;
-}
-
-/* Items left */
-.todo-count {
-  flex-grow: 1;
-  min-width: 8rem;
-}
-
-/* Filters */
-.filters {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: nowrap;
-  justify-content: center;
-  flex-grow: 2;
-}
-
-.filter-btn {
-  background: transparent;
-  border: 2px solid transparent;
-  padding: 0.3rem 0.75rem;
-  border-radius: 6px;
-  color: #555;
-  font-weight: 600;
-  cursor: pointer;
-  user-select: none;
-  transition: 
-    background-color 0.3s ease, 
-    color 0.3s ease, 
-    border-color 0.3s ease;
-}
-
-.filter-btn:hover,
-.filter-btn:focus {
-  color: #22a6b3;
-  border-color: #22a6b3;
-  outline: none;
-}
-
-.filter-btn.active {
-  color: #fff;
-  background-color: #22a6b3;
-  border-color: #22a6b3;
-  cursor: default;
-}
-
-/* Clear completed button */
-.clear-btn {
-  background: transparent;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  font-weight: 600;
-  padding: 0.3rem 0.75rem;
-  border-radius: 6px;
-  user-select: none;
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.clear-btn:hover,
-.clear-btn:focus {
-  color: #22a6b3;
-  background-color: #e6f7fa;
-  outline: none;
-}
-
-/* Scrollbar styling (webkits) */
-.todo-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.todo-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.todo-container::-webkit-scrollbar-thumb {
-  background-color: rgba(34,166,179,0.3);
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.todo-container:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(34,166,179,0.6);
-}
-
-/* Transitions for todo item appearance/removal */
-.todo-item {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.todo-item.removing {
-  opacity: 0;
-  transform: translateX(100%);
-  height: 0;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  transition: opacity 0.25s ease, transform 0.25s ease, height 0.25s ease, padding 0.25s ease, margin 0.25s ease;
-}
+/* End of stylesheet */
 
 
-/* Responsive Design */
-@media (max-width: 480px) {
-  .todo-app {
-    padding: 1.5rem 1.5rem 2rem 1.5rem;
-    width: 100%;
-  }
+-----NEW FILE-----
 
-  #todo-input {
-    font-size: 1rem;
-  }
+/*
+  script.js
+  Modular calculator logic + UI controller.
+  - Calculator class: pure logic, no DOM
+  - UI module: handles DOM, events, keyboard, theme, history persistence
+*/
 
-  #add-todo-btn {
-    font-size: 1rem;
-  }
+(() => {
+  'use strict';
 
-  .app-title {
-    font-size: 1.75rem;
-  }
-}
-```
-
--------------
-
-FILE: app.js
-```js
-// Select DOM elements
-const todoForm = document.getElementById('todo-form');
-const todoInput = document.getElementById('todo-input');
-const todoList = document.getElementById('todo-list');
-const todoCountEl = document.getElementById('todo-count');
-const filterButtons = document.querySelectorAll('.filter-btn');
-const clearCompletedBtn = document.getElementById('clear-completed');
-
-let todos = [];
-let currentFilter = 'all';
-
-// Initialize app
-document.addEventListener('DOMContentLoaded', () => {
-  loadTodosFromStorage();
-  renderTodos();
-  updateTodoCount();
-  updateFilterButtons();
-});
-
-/////////////////////////
-// Storage
-/////////////////////////
-
-function saveTodosToStorage() {
-  localStorage.setItem('todos', JSON.stringify(todos));
-}
-
-function loadTodosFromStorage() {
-  const stored = localStorage.getItem('todos');
-  if (stored) {
-    try {
-      todos = JSON.parse(stored);
-      if (!Array.isArray(todos)) todos = [];
-    } catch {
-      todos = [];
-    }
-  }
-}
-
-/////////////////////////
-// Render & Update UI
-/////////////////////////
-
-function renderTodos() {
-  // Clear list
-  todoList.innerHTML = '';
-
-  // Filter todos according to currentFilter
-  const filtered = todos.filter(todo => {
-    if (currentFilter === 'all') return true;
-    if (currentFilter === 'active') return !todo.completed;
-    if (currentFilter === 'completed') return todo.completed;
-    return true;
-  });
-
-  if (filtered.length === 0) {
-    const emptyItem = document.createElement('li');
-    emptyItem.className = 'todo-item empty';
-    emptyItem.textContent = 'No todos to display.';
-    emptyItem.style.textAlign = 'center';
-    emptyItem.style.color = '#999';
-    emptyItem.style.userSelect = 'none';
-    todoList.appendChild(emptyItem);
-    return;
-  }
-
-  // Create todo elements
-  filtered.forEach(todo => {
-    const li = document.createElement('li');
-    li.className = 'todo-item';
-    li.dataset.id = todo.id;
-    if (todo.completed) li.classList.add('completed');
-
-    // Checkbox
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = todo.completed;
-    checkbox.setAttribute('aria-label', 'Mark todo as completed');
-    checkbox.tabIndex = 0;
-    checkbox.addEventListener('change', () => toggleTodoCompleted(todo.id));
-
-    // Text span
-    const span = document.createElement('span');
-    span.className = 'todo-text';
-    span.textContent = todo.text;
-    span.tabIndex = -1;
-    span.setAttribute('aria-label', `Todo: ${todo.text}`);
-
-    // Delete button
-    const delBtn = document.createElement('button');
-    delBtn.className = 'delete-btn';
-    delBtn.setAttribute('aria-label', `Delete todo: ${todo.text}`);
-    delBtn.innerHTML = '&times;';
-    delBtn.addEventListener('click', () => deleteTodo(todo.id, li));
-
-    li.appendChild(checkbox);
-    li.appendChild(span);
-    li.appendChild(delBtn);
-
-    todoList.appendChild(li);
-  });
-  
-  updateTodoCount();
-}
-
-function updateTodoCount() {
-  const activeCount = todos.filter(t => !t.completed).length;
-  todoCountEl.textContent = `${activeCount} item${activeCount !== 1 ? 's' : ''} left`;
-}
-
-function updateFilterButtons() {
-  filterButtons.forEach(button => {
-    const filter = button.dataset.filter;
-    const isActive = filter === currentFilter;
-    button.classList.toggle('active', isActive);
-    button.setAttribute('aria-pressed', isActive.toString());
-  });
-}
-
-/////////////////////////
-// Event Handlers
-/////////////////////////
-
-todoForm.addEventListener('submit', event => {
-  event.preventDefault();
-  const text = todoInput.value.trim();
-  if (text.length === 0) return;
-
-  addTodo(text);
-  todoInput.value = '';
-  todoInput.focus();
-});
-
-filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const filter = button.dataset.filter;
-    if (filter === currentFilter) return;
-    currentFilter = filter;
-    updateFilterButtons();
-    renderTodos();
-  });
-});
-
-clearCompletedBtn.addEventListener('click', () => {
-  clearCompletedTodos();
-});
-
-/////////////////////////
-// Todo Operations
-/////////////////////////
-
-function addTodo(text) {
-  const newTodo = {
-    id: generateId(),
-    text,
-    completed: false,
-  };
-  todos.push(newTodo);
-  saveTodosToStorage();
-  renderTodos();
-}
-
-function deleteTodo(id, element) {
-  // Add removing animation class
-  element.classList.add('removing');
-
-  // After animation, remove from data and DOM
-  element.addEventListener('transitionend', () => {
-    todos = todos.filter(todo => todo.id !== id);
-    saveTodosToStorage();
-    renderTodos();
-  }, { once: true });
-}
-
-function toggleTodoCompleted(id) {
-  const todo = todos.find(t => t.id === id);
-  if (!todo) return;
-
-  todo.completed = !todo.completed;
-  saveTodosToStorage();
-  renderTodos();
-}
-
-function clearCompletedTodos() {
-  const completedExists = todos.some(t => t.completed);
-  if (!completedExists) return;
-
-  // Animate the removal of all completed todo elements before clearing data and re-rendering
-  const completedItems = Array.from(todoList.querySelectorAll('.todo-item.completed'));
-  if (completedItems.length === 0) return;
-
-  let animationsCompleted = 0;
-  const onAnimEnd = () => {
-    animationsCompleted++;
-    if (animationsCompleted === completedItems.length) {
-      todos = todos.filter(t => !t.completed);
-      saveTodosToStorage();
-      renderTodos();
+  /* ======================
+     Utility helpers
+     ====================== */
+  const safeLocalStorage = {
+    get(key) {
+      try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; }
+    },
+    set(key, value) {
+      try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* ignore */ }
+    },
+    remove(key) {
+      try { localStorage.removeItem(key); } catch (e) { /* ignore */ }
     }
   };
 
-  completedItems.forEach(item => {
-    item.classList.add('removing');
-    item.addEventListener('transitionend', onAnimEnd, { once: true });
+  const clampPrecision = (num, maxSig = 12) => {
+    // Return a string with a reasonable number of significant digits and trim trailing zeros
+    if (!isFinite(num)) return String(num);
+    // Use toPrecision to limit floating errors, then trim
+    let s = Number(num).toPrecision(maxSig);
+    // toPrecision may output exponential form for large/small numbers; try to normalize
+    if (s.indexOf('e') !== -1) {
+      // Keep exponential representation but make it compact
+      return s;
+    }
+    // Remove trailing zeros on decimals
+    if (s.indexOf('.') >= 0) s = s.replace(/(?:\.0+|(?<=\.[0-9]*?)0+)$/, '');
+    return s;
+  };
+
+  const nowISO = () => new Date().toISOString();
+
+  /* ======================
+     Calculator class (pure logic)
+     ====================== */
+  class Calculator {
+    constructor({ historyLimit = 50, storageKey = 'calc_history_v1' } = {}) {
+      this.currentValue = '0'; // string representation of the currently typed value
+      this.previousValue = ''; // stored operand for binary ops
+      this.operator = null; // '+', '-', '*', '/'
+      this.waitingForNewValue = false; // true when an operator was pressed and we expect a new value
+      this.error = null; // error message string when in error state
+      this.history = []; // array of {expr, result, timestamp}
+      this.historyLimit = historyLimit;
+      this.storageKey = storageKey;
+      this.loadHistoryFromStorage();
+    }
+
+    /* Append a digit (0-9) - manages leading zeros and waitingForNewValue */
+    inputDigit(digit) {
+      if (this.error) {
+        // Starting over after error: clear error state and start a new value
+        this.clear();
+      }
+
+      if (this.waitingForNewValue) {
+        // Start new current value
+        this.currentValue = digit;
+        this.waitingForNewValue = false;
+        return;
+      }
+
+      if (this.currentValue === '0') {
+        // Replace leading zero
+        this.currentValue = digit;
+      } else {
+        this.currentValue = this.currentValue + digit;
+      }
+    }
+
+    /* Add decimal point if not present */
+    inputDecimal() {
+      if (this.error) {
+        this.clear();
+      }
+
+      if (this.waitingForNewValue) {
+        // start new value with '0.'
+        this.currentValue = '0.';
+        this.waitingForNewValue = false;
+        return;
+      }
+
+      if (!this.currentValue.includes('.')) {
+        this.currentValue = this.currentValue + '.';
+      }
+    }
+
+    /* Handle operator input. Supports chaining by computing intermediate results. */
+    inputOperator(op) {
+      if (this.error) return; // ignore operator inputs while in error
+
+      // If there's an operator and we're not waiting for new value, compute first
+      if (this.operator && !this.waitingForNewValue) {
+        try {
+          const computed = this.compute();
+          // computed has updated currentValue already
+        } catch (e) {
+          // compute() will set error internally
+          return;
+        }
+      }
+
+      // Move currentValue to previousValue and set operator
+      this.previousValue = this.currentValue;
+      this.operator = op;
+      this.waitingForNewValue = true;
+    }
+
+    /* Compute the result of previousValue (operator) currentValue
+       Returns the numeric result or throws controlled exception
+    */
+    compute() {
+      if (!this.operator) return Number(this.currentValue);
+      const prev = parseFloat(this.previousValue);
+      const curr = parseFloat(this.currentValue);
+
+      if (Number.isNaN(prev) || Number.isNaN(curr)) {
+        this.setError('Error');
+        throw new Error('Invalid numbers for computation');
+      }
+
+      let result;
+      switch (this.operator) {
+        case '+':
+          result = prev + curr;
+          break;
+        case '-':
+          result = prev - curr;
+          break;
+        case '*':
+          result = prev * curr;
+          break;
+        case '/':
+          if (curr === 0) {
+            this.setError('Division by 0');
+            throw new Error('Division by zero');
+          }
+          result = prev / curr;
+          break;
+        default:
+          this.setError('Error');
+          throw new Error('Unknown operator');
+      }
+
+      // Format and store
+      const resultStr = clampPrecision(result);
+      const expr = `${this.previousValue} ${this.operator} ${this.currentValue}`;
+
+      // Add to history
+      this.addHistory(expr, resultStr);
+
+      // Reset state to show result as current value
+      this.currentValue = String(resultStr);
+      this.previousValue = '';
+      this.operator = null;
+      this.waitingForNewValue = false;
+      return result;
+    }
+
+    /* Percent: applies according to standard calculator rules
+       If there's a previous value and an operator, current = prev * (current / 100)
+       Else current = current / 100
+    */
+    percent() {
+      if (this.error) return;
+
+      const curr = parseFloat(this.currentValue);
+      if (Number.isNaN(curr)) return;
+
+      let newVal;
+      if (this.previousValue && this.operator) {
+        const prev = parseFloat(this.previousValue);
+        if (Number.isNaN(prev)) return;
+        newVal = prev * (curr / 100);
+      } else {
+        newVal = curr / 100;
+      }
+
+      this.currentValue = clampPrecision(newVal);
+      // After percent, we are no longer waiting for a new value
+      this.waitingForNewValue = false;
+    }
+
+    /* Clear all state */
+    clear() {
+      this.currentValue = '0';
+      this.previousValue = '';
+      this.operator = null;
+      this.waitingForNewValue = false;
+      this.error = null;
+    }
+
+    /* Delete last character from current value */
+    delete() {
+      if (this.error) {
+        // clearing error on delete feels natural
+        this.clear();
+        return;
+      }
+
+      if (this.waitingForNewValue) {
+        // If waiting for new value, pressing delete should clear operator selection
+        this.operator = null;
+        this.waitingForNewValue = false;
+        return;
+      }
+
+      if (this.currentValue.length <= 1) {
+        this.currentValue = '0';
+      } else {
+        this.currentValue = this.currentValue.slice(0, -1);
+        // If last char was a dot, keep as proper state
+        if (this.currentValue === '-' || this.currentValue === '' ) this.currentValue = '0';
+      }
+    }
+
+    /* Set an error state with friendly message (does not clear history) */
+    setError(message = 'Error') {
+      this.error = String(message || 'Error');
+      this.currentValue = this.error;
+      // Do not wipe previousValue or history; UI should handle disabling further operations
+    }
+
+    /* Return display representation for UI */
+    getDisplay() {
+      const exprParts = [];
+      if (this.previousValue) exprParts.push(this.previousValue);
+      if (this.operator) exprParts.push(this.operator);
+      if (this.waitingForNewValue) {
+        // show operator waiting
+      } else if (this.currentValue) {
+        // show current value in expression area if there's also a previous
+        if (this.previousValue) exprParts.push(this.currentValue);
+      }
+
+      const expression = exprParts.join(' ');
+      const result = this.currentValue;
+      return { expression: expression || '0', result };
+    }
+
+    /* History management */
+    addHistory(expr, result) {
+      const item = { expr: String(expr), result: String(result), timestamp: nowISO() };
+      this.history.unshift(item);
+      if (this.history.length > this.historyLimit) this.history.length = this.historyLimit;
+      this.saveHistoryToStorage();
+    }
+
+    loadHistoryFromStorage() {
+      const stored = safeLocalStorage.get(this.storageKey);
+      if (Array.isArray(stored)) {
+        this.history = stored.slice(0, this.historyLimit);
+      }
+    }
+
+    saveHistoryToStorage() {
+      safeLocalStorage.set(this.storageKey, this.history.slice(0, this.historyLimit));
+    }
+
+    clearHistory() {
+      this.history = [];
+      this.saveHistoryToStorage();
+    }
+  }
+
+  /* ======================
+     UI Controller Module
+     ====================== */
+  const UI = (() => {
+    // DOM hooks
+    const displayExpressionEl = () => document.getElementById('displayExpression');
+    const displayResultEl = () => document.getElementById('displayResult');
+    const historyListEl = () => document.getElementById('historyList');
+    const keypadEl = () => document.getElementById('keypad');
+    const themeToggleEl = () => document.getElementById('themeToggle');
+    const clearHistoryBtnEl = () => document.getElementById('clearHistoryBtn');
+    const calculatorRoot = () => document.getElementById('calculator');
+
+    let calc = null; // Calculator instance
+
+    /* Initialize UI with a Calculator instance */
+    const init = (calculatorInstance) => {
+      calc = calculatorInstance;
+      bindEvents();
+      loadTheme();
+      renderAll();
+    };
+
+    /* Render display and history */
+    const renderAll = () => {
+      renderDisplay();
+      renderHistory();
+    };
+
+    const renderDisplay = () => {
+      const disp = calc.getDisplay();
+      const exprEl = displayExpressionEl();
+      const resEl = displayResultEl();
+
+      if (!exprEl || !resEl) return;
+
+      exprEl.textContent = disp.expression;
+      resEl.textContent = disp.result;
+
+      // Error styling
+      const root = calculatorRoot();
+      if (calc.error) {
+        root.classList && root.classList.add('error');
+        // disable operator and equals buttons
+        setOperatorsDisabled(true);
+        // announce error (aria-live on result will contain the error text)
+      } else {
+        root.classList && root.classList.remove('error');
+        setOperatorsDisabled(false);
+      }
+
+      // Highlight selected operator button via aria-pressed
+      updateOperatorPressedState();
+    };
+
+    const formatHistoryItemNode = (item, idx) => {
+      const li = document.createElement('li');
+      li.className = 'history-item';
+      li.setAttribute('role', 'button'); // clickable
+      li.setAttribute('tabindex', '0');
+      li.dataset.index = String(idx);
+
+      const expr = document.createElement('div');
+      expr.className = 'hist-expr';
+      expr.textContent = item.expr;
+
+      const res = document.createElement('div');
+      res.className = 'hist-res';
+      res.textContent = item.result;
+
+      li.appendChild(expr);
+      li.appendChild(res);
+      return li;
+    };
+
+    const renderHistory = () => {
+      const root = historyListEl();
+      if (!root) return;
+      // Clear
+      root.innerHTML = '';
+      if (!Array.isArray(calc.history) || calc.history.length === 0) return;
+      calc.history.forEach((item, i) => {
+        const node = formatHistoryItemNode(item, i);
+        root.appendChild(node);
+      });
+    };
+
+    const setOperatorsDisabled = (disabled) => {
+      const opButtons = document.querySelectorAll('.operator, .equals');
+      opButtons.forEach(b => {
+        b.disabled = !!disabled;
+      });
+    };
+
+    const updateOperatorPressedState = () => {
+      const opButtons = document.querySelectorAll('.operator');
+      opButtons.forEach(btn => {
+        const val = btn.dataset && btn.dataset.value ? btn.dataset.value : btn.getAttribute('data-value');
+        if (val && calc.operator && val === calc.operator) {
+          btn.setAttribute('aria-pressed', 'true');
+          // also focusable style will show because of :focus etc.
+        } else {
+          btn.setAttribute('aria-pressed', 'false');
+        }
+      });
+    };
+
+    /* Handle click events from keypad via delegation */
+    const onKeypadClick = (e) => {
+      const btn = e.target.closest('button');
+      if (!btn || !keypadEl().contains(btn)) return;
+      e.preventDefault();
+
+      // Determine action
+      const action = btn.dataset.action;
+      const type = btn.dataset.type;
+      const value = btn.dataset.value;
+
+      if (action) {
+        handleAction(action);
+      } else if (type === 'digit') {
+        handleDigit(value);
+      } else if (type === 'operator') {
+        handleOperator(value);
+      }
+      // render updated UI
+      renderAll();
+    };
+
+    /* Handle keyboard events */
+    const onKeyDown = (e) => {
+      if (!document.body.contains(calculatorRoot())) return;
+
+      // Map keys
+      const key = e.key;
+
+      // Allow typing into inputs if any (not our UI) - but our page has no input fields
+      // Map digits
+      if (/^[0-9]$/.test(key)) {
+        e.preventDefault();
+        handleDigit(key);
+        renderAll();
+        return;
+      }
+
+      // Numpad digits
+      if (/^Numpad[0-9]$/.test(e.code)) {
+        const digit = e.code.slice(-1);
+        e.preventDefault();
+        handleDigit(digit);
+        renderAll();
+        return;
+      }
+
+      // Decimal
+      if (key === '.' || key === ',') {
+        e.preventDefault();
+        handleDecimal();
+        renderAll();
+        return;
+      }
+
+      // Operators
+      if (key === '+' || key === '-' || key === '*' || key === '/') {
+        e.preventDefault();
+        handleOperator(key);
+        renderAll();
+        return;
+      }
+
+      // Percent
+      if (key === '%' ) {
+        e.preventDefault();
+        handlePercent();
+        renderAll();
+        return;
+      }
+
+      // Enter or '=' evaluate
+      if (key === 'Enter' || key === '=' ) {
+        e.preventDefault();
+        handleEquals();
+        renderAll();
+        return;
+      }
+
+      // Backspace delete
+      if (key === 'Backspace') {
+        e.preventDefault();
+        handleDelete();
+        renderAll();
+        return;
+      }
+
+      // Escape clear
+      if (key === 'Escape') {
+        e.preventDefault();
+        handleClear();
+        renderAll();
+        return;
+      }
+
+      // If user presses some other keys we ignore
+    };
+
+    /* Action handlers */
+    const handleDigit = (digit) => {
+      if (!calc) return;
+      calc.inputDigit(String(digit));
+    };
+
+    const handleDecimal = () => {
+      if (!calc) return;
+      calc.inputDecimal();
+    };
+
+    const handleOperator = (op) => {
+      if (!calc) return;
+      // Normalize common symbols to internal values
+      const normalized = (op === '×' || op === 'x') ? '*' : (op === '÷' ? '/' : op);
+      calc.inputOperator(normalized);
+    };
+
+    const handlePercent = () => {
+      if (!calc) return;
+      calc.percent();
+    };
+
+    const handleClear = () => {
+      if (!calc) return;
+      calc.clear();
+    };
+
+    const handleDelete = () => {
+      if (!calc) return;
+      calc.delete();
+    };
+
+    const handleEquals = () => {
+      if (!calc) return;
+      try {
+        // If an operator exists and waitingForNewValue is true, it means user pressed operator then equals
+        // We'll treat currentValue as previousValue if necessary (e.g., 5 + = -> 10 typical calculator repeats behavior not implemented)
+        calc.compute();
+      } catch (e) {
+        // compute sets error state
+        console.warn(e && e.message ? e.message : e);
+      }
+    };
+
+    const handleAction = (action) => {
+      switch (action) {
+        case 'clear':
+          handleClear();
+          break;
+        case 'delete':
+          handleDelete();
+          break;
+        case 'percent':
+          handlePercent();
+          break;
+        case 'equals':
+          handleEquals();
+          break;
+        case 'clear-history':
+          handleClearHistory();
+          break;
+        default:
+          console.warn('Unknown action:', action);
+      }
+    };
+
+    const handleClearHistory = () => {
+      if (!calc) return;
+      calc.clearHistory();
+      renderHistory();
+    };
+
+    /* History item click/keyboard handler to recall a past calculation */
+    const onHistoryClick = (e) => {
+      const li = e.target.closest('.history-item');
+      if (!li) return;
+      const idx = Number(li.dataset.index);
+      if (!Number.isFinite(idx)) return;
+      const item = calc.history[idx];
+      if (!item) return;
+      // When recalling, set currentValue to the item's result and clear operator/previous
+      calc.currentValue = String(item.result);
+      calc.previousValue = '';
+      calc.operator = null;
+      calc.waitingForNewValue = false;
+      calc.error = null;
+      renderAll();
+    };
+
+    const onHistoryKeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onHistoryClick(e);
+      }
+    };
+
+    /* Theme handling */
+    const THEME_KEY = 'calc_theme_pref';
+
+    const loadTheme = () => {
+      const saved = safeLocalStorage.get(THEME_KEY);
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const body = document.body;
+      if (saved === 'dark' || (saved === null && prefersDark)) {
+        body.classList.add('dark-theme');
+        themeToggleEl() && themeToggleEl().setAttribute('aria-pressed', 'true');
+      } else {
+        body.classList.remove('dark-theme');
+        themeToggleEl() && themeToggleEl().setAttribute('aria-pressed', 'false');
+      }
+    };
+
+    const toggleTheme = () => {
+      const body = document.body;
+      const isDark = body.classList.toggle('dark-theme');
+      safeLocalStorage.set(THEME_KEY, isDark ? 'dark' : 'light');
+      themeToggleEl() && themeToggleEl().setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    };
+
+    /* Bind DOM events */
+    const bindEvents = () => {
+      // Keypad clicks (delegated)
+      const kp = keypadEl();
+      if (kp) kp.addEventListener('click', onKeypadClick);
+
+      // Keyboard events
+      window.addEventListener('keydown', onKeyDown);
+
+      // Theme toggle
+      const tbtn = themeToggleEl();
+      if (tbtn) tbtn.addEventListener('click', (e) => { e.preventDefault(); toggleTheme(); });
+
+      // Clear history
+      const ch = clearHistoryBtnEl();
+      if (ch) ch.addEventListener('click', (e) => { e.preventDefault(); handleClearHistory(); renderAll(); });
+
+      // History interaction
+      const hroot = historyListEl();
+      if (hroot) {
+        hroot.addEventListener('click', onHistoryClick);
+        hroot.addEventListener('keydown', onHistoryKeydown);
+      }
+
+      // Ensure buttons respond to touch and keyboard natively (they are <button>)
+
+      // Accessibility: allow clicks on display area to focus keypad for keyboard users
+      const exprEl = displayExpressionEl();
+      const resEl = displayResultEl();
+      [exprEl, resEl].forEach(el => {
+        if (el) el.addEventListener('click', () => { keypadEl() && keypadEl().focus && keypadEl().focus(); });
+      });
+    };
+
+    return { init, renderAll };
+  })();
+
+  /* ======================
+     Bootstrap on DOMContentLoaded
+     ====================== */
+  document.addEventListener('DOMContentLoaded', () => {
+    const calculator = new Calculator({ historyLimit: 50, storageKey: 'calc_history_v1' });
+    UI.init(calculator);
   });
-}
 
-/////////////////////////
-// Utils
-/////////////////////////
-
-function generateId() {
-  // Simple unique ID generator based on timestamp and random number
-  return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
-}
-```
+})();

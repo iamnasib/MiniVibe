@@ -1,0 +1,476 @@
+/*
+  style.css
+  Modern responsive calculator styles
+  JS hooks referenced in comments: #displayExpression, #displayResult, #historyList, .btn, .operator, .equals, #themeToggle, .history-item
+*/
+
+:root {
+  /* Light theme palette */
+  --bg: #f5f7fb; /* app background */
+  --surface: #ffffff; /* surfaces like calculator card */
+  --primary: #0b5fff; /* primary accent / equals */
+  --accent: #10b981; /* secondary accent (operators) */
+  --text: #0b1b2b; /* primary text */
+  --muted: #5b6b7a; /* secondary text */
+  --danger: #ef4444; /* errors / clear */
+  --shadow: 0 6px 20px rgba(8, 20, 45, 0.06);
+  --glass: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.4)
+  );
+  --focus-ring: 3px rgba(11, 95, 255, 0.18);
+
+  --max-width: 480px;
+  --gap: 12px;
+  --btn-radius: 10px;
+  --btn-min-size: 56px; /* touch target */
+
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+/* Dark theme variables (toggle by adding .dark-theme to <body>) */
+body.dark-theme {
+  --bg: #0b1220;
+  --surface: #0f1724;
+  --primary: #7cc0ff;
+  --accent: #34d399;
+  --text: #e6eef8;
+  --muted: #98a6b3;
+  --danger: #ff7b7b;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  --glass: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  --focus-ring: 3px rgba(124, 192, 255, 0.12);
+}
+
+/* Global resets and accessibility */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Utility: visually-hidden / sr-only for accessibility */
+.visually-hidden,
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Calculator container */
+.calculator {
+  width: 100%;
+  max-width: var(--max-width);
+  background: linear-gradient(
+    180deg,
+    var(--surface),
+    color-mix(in srgb, var(--surface) 96%, var(--bg))
+  );
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto; /* header, history, display+keypad handled below */
+  gap: 12px;
+}
+
+/* Header / top controls */
+.calculator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#themeToggle {
+  /* JS hook: #themeToggle */
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+#themeToggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring);
+  border-radius: 8px;
+}
+
+/* History area */
+.history {
+  background: transparent;
+}
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.history-title {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+#clearHistoryBtn {
+  /* small unobtrusive clear history */
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+#clearHistoryBtn:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+#clearHistoryBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring);
+}
+
+.history-list-wrapper {
+  max-height: 96px;
+  overflow: auto;
+  border-radius: 10px;
+  padding: 6px;
+  background: transparent;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Each history item - clickable to recall */
+.history-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--surface) 90%, var(--bg));
+  border: 1px solid transparent;
+}
+.history-item:hover {
+  background: color-mix(in srgb, var(--surface) 84%, var(--bg));
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+}
+.history-item:active {
+  transform: translateY(1px);
+}
+.history-item .hist-expr {
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.history-item .hist-res {
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Display area */
+.display {
+  background: var(--surface);
+  padding: 14px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 88px;
+}
+.expression {
+  /* #displayExpression JS hook */
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 4px;
+}
+
+.result {
+  /* #displayResult JS hook (aria-live) */
+  text-align: right;
+  font-weight: 700;
+  font-size: clamp(1.45rem, 6vw, 2.4rem);
+  color: var(--text);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 4px;
+}
+
+/* Keypad grid */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* Buttons - primary class .btn used by JS */
+.btn {
+  appearance: none;
+  border: 0;
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  padding: 0;
+  min-height: var(--btn-min-size);
+  min-width: var(--btn-min-size);
+  border-radius: var(--btn-radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(2, 6, 23, 0.04);
+  transition:
+    transform 0.06s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease,
+    color 0.12s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring);
+  border-radius: var(--btn-radius);
+}
+
+/* Digit buttons */
+.digit {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface) 97%, var(--bg)),
+    var(--surface)
+  );
+}
+.digit:hover {
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+}
+
+/* Operator buttons (÷ × - +) */
+.operator {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 14%, var(--surface)),
+    color-mix(in srgb, var(--accent) 8%, var(--surface))
+  );
+  color: var(--text);
+  font-weight: 600;
+}
+.operator:hover {
+  filter: brightness(0.98);
+}
+
+/* Action buttons: clear, delete, percent */
+.action {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface) 95%, var(--bg)),
+    var(--surface)
+  );
+  color: var(--muted);
+}
+.action:hover {
+  background: color-mix(in srgb, var(--surface) 90%, var(--bg));
+  color: var(--text);
+}
+
+/* Clear button emphasised (uses danger color) */
+.action[data-action="clear"] {
+  color: var(--danger);
+  font-weight: 600;
+}
+.action[data-action="clear"]:hover {
+  background: color-mix(in srgb, var(--danger) 6%, var(--surface));
+}
+
+/* Equals button more prominent */
+.equals {
+  background: linear-gradient(
+    180deg,
+    var(--primary),
+    color-mix(in srgb, var(--primary) 86%, black)
+  );
+  color: white;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.equals:hover {
+  filter: brightness(0.98);
+}
+.equals:active {
+  transform: translateY(1px) scale(0.998);
+}
+
+/* Make 0 wide (spans two columns) - matches .wide in HTML */
+.btn.wide {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+/* Responsive tweak: allow equals to span one row on small screens if desired */
+/* In the provided HTML equals is last cell; we keep natural flow but style to be visually larger. */
+
+/* Focus visible for keyboard users (strong contrast) */
+@media (forced-colors: none) {
+  .btn:focus {
+    box-shadow: 0 0 0 var(--focus-ring);
+  }
+}
+
+/* Error state class for display (applied by JS via .error on .display) */
+.display.error {
+  border: 1px solid color-mix(in srgb, var(--danger) 24%, transparent);
+}
+.display.error .result {
+  color: var(--danger);
+}
+
+/* Small footer */
+.calculator-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+}
+.calculator-footer small {
+  color: var(--muted);
+}
+
+/* Scrollbar styles for history list (subtle) */
+.history-list-wrapper::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.history-list-wrapper::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted) 14%, transparent);
+  border-radius: 6px;
+}
+.history-list-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Media queries: scale up on larger screens and ensure touch sizes on small screens */
+@media (min-width: 520px) {
+  body {
+    padding: 40px;
+  }
+  .calculator {
+    padding: 22px;
+    gap: 16px;
+  }
+  .history-list-wrapper {
+    max-height: 120px;
+  }
+  .result {
+    font-size: clamp(1.6rem, 4.2vw, 2.8rem);
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --gap: 10px;
+    --btn-min-size: 54px;
+  }
+  .calculator {
+    padding: 12px;
+  }
+  .history-list-wrapper {
+    max-height: 76px;
+  }
+  .display {
+    min-height: 80px;
+    padding: 10px;
+  }
+  .btn {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  .btn.wide {
+    padding-left: 16px;
+  }
+}
+
+/* Make sure color contrast on operators & equals remains sufficient */
+/* Operators & equals should always show readable text in both themes */
+.operator,
+.equals {
+  color: color-mix(in srgb, var(--surface) 96%, var(--text));
+}
+
+/* Small helper for disabled buttons (used by JS to disable when error) */
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.06);
+}
+
+/* End of stylesheet */
